@@ -1,0 +1,6 @@
+# VS Stuffs
+
+.vs/
+Build/
+Build-Int/
+*.user
