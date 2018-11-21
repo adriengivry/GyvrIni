@@ -99,6 +99,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
       <Command>set BUILD_FOLDER=$(SolutionDir)..\Build\
@@ -118,6 +119,7 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <PostBuildEvent>
       <Command>set BUILD_FOLDER=$(SolutionDir)..\Build\
@@ -139,6 +141,7 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -164,6 +167,7 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -182,6 +186,12 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
     <BuildLog />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\GyvrIni\API\Export.h" />
+    <ClInclude Include="include\GyvrIni\Core\IniFile.h" />
+    <ClInclude Include="include\GyvrIni\GyvrIni.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GyvrIni\Core\IniFile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
