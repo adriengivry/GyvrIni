@@ -3,4 +3,5 @@
 .vs/
 Bin/
 Bin-Int/
+Build/
 *.user
