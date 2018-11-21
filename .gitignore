@@ -1,6 +1,6 @@
 # VS Stuffs
 
 .vs/
-Build/
-Build-Int/
+Bin/
+Bin-Int/
 *.user
