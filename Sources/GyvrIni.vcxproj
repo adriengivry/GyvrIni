@@ -197,6 +197,9 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
   <ItemGroup>
     <ClCompile Include="src\GyvrIni\Core\IniFile.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="include\GyvrIni\Core\IniFile.inl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
