@@ -71,8 +71,13 @@ void GyvrIni::Core::IniFile::Load()
 		std::string currentLine;
 
 		while (std::getline(iniFile, currentLine))
+		{
 			if (IsValidLine(currentLine))
+			{
+				currentLine.erase(std::remove_if(currentLine.begin(), currentLine.end(), isspace), currentLine.end());
 				RegisterPair(ExtractKeyAndValue(currentLine));
+			}
+		}
 
 		iniFile.close();
 	}
