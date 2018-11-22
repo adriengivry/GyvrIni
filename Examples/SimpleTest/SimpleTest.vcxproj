@@ -168,6 +168,9 @@ xcopy "$(SolutionDir)..\Build\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="test.ini" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
