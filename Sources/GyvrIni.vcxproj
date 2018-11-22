@@ -100,6 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>GYVRINI_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>set BUILD_FOLDER=$(SolutionDir)..\Build\
@@ -120,6 +121,7 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>GYVRINI_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>set BUILD_FOLDER=$(SolutionDir)..\Build\
@@ -142,6 +144,7 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>GYVRINI_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -168,6 +171,7 @@ xcopy "$(OutDir)*.dll" "%BUILD_FOLDER%$(ProjectName)\bin\$(Platform)\$(Configura
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>GYVRINI_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
