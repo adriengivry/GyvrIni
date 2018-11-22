@@ -115,7 +115,7 @@ bool GyvrIni::Core::IniFile::IsValidLine(const std::string & p_attributeLine) co
 	if (p_attributeLine.size() == 0)
 		return false;
 	
-	if (p_attributeLine[0] == '#')
+	if (p_attributeLine[0] == '#' || p_attributeLine[0] == ';' || p_attributeLine[0] == '[')
 		return false;
 	
 	if (std::count(p_attributeLine.begin(), p_attributeLine.end(), '=') != 1)
