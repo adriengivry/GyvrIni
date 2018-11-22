@@ -7,6 +7,8 @@ int main()
 
 	bool result = myFile.Set<std::string>("Hello", "dsad");
 
+	std::string test = myFile.Get<std::string>("Hello");
+
 	for (const std::string& line : myFile.GetFormattedContent())
 		std::cout << line << std::endl;
 

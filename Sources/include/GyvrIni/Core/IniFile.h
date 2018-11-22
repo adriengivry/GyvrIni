@@ -47,7 +47,7 @@ namespace GyvrIni::Core
 		* @param p_key
 		*/
 		template<typename T>
-		T Get(const std::string& p_key) const;
+		T Get(const std::string& p_key);
 
 		/**
 		* Set a new value to the given key (Not applied to the real file untill Rewrite() or Save() is called)
