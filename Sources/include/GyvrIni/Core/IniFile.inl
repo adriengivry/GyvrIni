@@ -12,7 +12,7 @@
 #include <assert.h>
 
 template<typename T>
-inline T GyvrIni::Core::IniFile::Get(const std::string & p_key)
+inline T GyvrIni::Core::IniFile::Get(const std::string & p_key) const
 {
 	if constexpr (std::is_same<bool, T>::value)
 	{

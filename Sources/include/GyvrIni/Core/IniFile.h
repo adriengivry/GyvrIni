@@ -12,7 +12,6 @@
 
 #include <string>
 #include <unordered_map>
-#include <type_traits>
 
 namespace GyvrIni::Core
 {
@@ -22,6 +21,9 @@ namespace GyvrIni::Core
 	class API_GYVRINI IniFile final
 	{
 	public:
+		using AttributePair	= std::pair<std::string, std::string>;
+		using AttributeMap	= std::unordered_map<std::string, std::string>;
+
 		/**
 		* Create an IniFile by parsing the given file path and extracting key/values pairs for future usage
 		* @param p_filePath
@@ -34,16 +36,8 @@ namespace GyvrIni::Core
 		void Reload();
 
 		/**
-		* Save changes made to the data to the associated file (Filepath given at construction).
-		* The effect is similar to Rewrite() but only affect modified lines and preserve comments (Any comment on a modified line will get deleted).
-		* This method takes more time to process than the 'destructive' Rewrite()
-		*/
-		void SaveChanges();
-
-		/**
 		* Rewrite the entiere .ini file with the current values. This operation is destructive and can't be undone.
-		* Any comment in your .ini file will get destroyed. This method is faster than SaveChanges() because
-		* it doesn't have to rewrite comments and ignore consecutive line breaks
+		* Any comment or line break in your .ini file will get destroyed
 		*/
 		void Rewrite() const;
 
@@ -53,7 +47,7 @@ namespace GyvrIni::Core
 		* @param p_key
 		*/
 		template<typename T>
-		T Get(const std::string& p_key);
+		T Get(const std::string& p_key) const;
 
 		/**
 		* Set a new value to the given key (Not applied to the real file untill Rewrite() or Save() is called)
@@ -72,32 +66,40 @@ namespace GyvrIni::Core
 		bool Add(const std::string& p_key, const T& p_value);
 
 		/**
-		* Remove a key/value pair identified by the given key (Not applied to the real file untill Rewrite() or Save() is called)
+		* Remove an key/value pair identified by the given key (Not applied to the real file untill Rewrite() or Save() is called)
 		* @param p_key
 		*/
 		bool Remove(const std::string& p_key);
 
 		/**
+		* Remove all key/value pairs (Not applied to the real file untill Rewrite() or Save() is called)
+		*/
+		void RemoveAll();
+
+		/**
 		* Verify if the given key exists
 		* @param p_key
 		*/
-		bool IsKeyExisting(const std::string& p_key);
+		bool IsKeyExisting(const std::string& p_key) const;
+
+		/**
+		* Get the content stored in the ini file as a vector of strings (Each string correspond to an attribute pair : Attribute=Value
+		*/
+		std::vector<std::string> GetFormattedContent() const;
 
 	private:
 		void RegisterPair(const std::string& p_key, const std::string& p_value);
-		void RegisterPair(const std::pair<std::string, std::string>& p_pair);
+		void RegisterPair(const AttributePair& p_pair);
 
 		void Load();
-		void Clear();
 
-		void GetFileRawContent(std::vector<std::string>& p_out);
-		std::pair<std::string, std::string> ExtractKeyAndValue(const std::string& p_attributeLine) const;
-		bool IsValidLine(const std::string& p_attributeLine) const;
-		bool StringToBoolean(const std::string& p_value) const;
+		AttributePair	ExtractKeyAndValue	(const std::string& p_attributeLine)	const;
+		bool			IsValidLine			(const std::string& p_attributeLine)	const;
+		bool			StringToBoolean		(const std::string& p_value)			const;
 
 	private:
-		std::string m_filePath;
-		std::unordered_map<std::string, std::string> m_data;
+		std::string		m_filePath;
+		AttributeMap	m_data;
 	};
 }
 

@@ -16,33 +16,8 @@ GyvrIni::Core::IniFile::IniFile(const std::string& p_filePath) : m_filePath(p_fi
 
 void GyvrIni::Core::IniFile::Reload()
 {
-	Clear();
+	RemoveAll();
 	Load();
-}
-
-void GyvrIni::Core::IniFile::SaveChanges()
-{
-	// TODO: WORK IN PROGRESS (Add() not saved yet)
-
-	std::vector<std::string> rawContent;
-
-	GetFileRawContent(rawContent);
-
-	for (std::string& line : rawContent)
-	{
-		auto[key, value] = ExtractKeyAndValue(line);
-		if (IsKeyExisting(key))
-			line = key + "=" + m_data[key];
-	}
-
-	std::ofstream outfile;
-	outfile.open(m_filePath, std::ios_base::trunc);
-
-	if (outfile.is_open())
-		for (const std::string& line : rawContent)
-			outfile << line << std::endl;
-
-	outfile.close();
 }
 
 bool GyvrIni::Core::IniFile::Remove(const std::string & p_key)
@@ -56,19 +31,34 @@ bool GyvrIni::Core::IniFile::Remove(const std::string & p_key)
 	return false;
 }
 
-bool GyvrIni::Core::IniFile::IsKeyExisting(const std::string& p_key)
+void GyvrIni::Core::IniFile::RemoveAll()
 {
-	return m_data.find(p_key) != m_data.end();
+	m_data.clear();
 }
 
-void GyvrIni::Core::IniFile::RegisterPair(const std::pair<std::string, std::string>& p_pair)
+bool GyvrIni::Core::IniFile::IsKeyExisting(const std::string& p_key) const
 {
-	m_data.insert(p_pair);
+	return m_data.find(p_key) != m_data.end();
 }
 
 void GyvrIni::Core::IniFile::RegisterPair(const std::string& p_key, const std::string& p_value)
 {
 	RegisterPair(std::make_pair(p_key, p_value));
+}
+
+void GyvrIni::Core::IniFile::RegisterPair(const AttributePair& p_pair)
+{
+	m_data.insert(p_pair);
+}
+
+std::vector<std::string> GyvrIni::Core::IniFile::GetFormattedContent() const
+{
+	std::vector<std::string> result;
+
+	for (const auto&[key, value] : m_data)
+		result.push_back(key + "=" + value);
+
+	return result;
 }
 
 void GyvrIni::Core::IniFile::Load()
@@ -100,27 +90,6 @@ void GyvrIni::Core::IniFile::Rewrite() const
 	}
 
 	outfile.close();
-}
-
-void GyvrIni::Core::IniFile::Clear()
-{
-	m_data.clear();
-}
-
-void GyvrIni::Core::IniFile::GetFileRawContent(std::vector<std::string>& p_out)
-{
-	std::fstream iniFile;
-	iniFile.open(m_filePath);
-
-	if (iniFile.is_open())
-	{
-		std::string currentLine;
-
-		while (std::getline(iniFile, currentLine))
-			p_out.push_back(currentLine);
-
-		iniFile.close();
-	}
 }
 
 std::pair<std::string, std::string> GyvrIni::Core::IniFile::ExtractKeyAndValue(const std::string& p_line) const
